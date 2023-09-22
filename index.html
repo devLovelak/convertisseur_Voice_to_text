@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>converter voice to text </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div class="voice_to_text"> 
+		<h1>Voice to Text Converter</h1>
+    <textarea id = "result" ></textarea> <br>
+        <button id = "start">Start</button>
+		<button id = "stop">Stop</button>
+    
+  </div>
+  <script type="text/javascript">
+    var startButton = document.getElementById('start');
+    var stopButton = document.getElementById('stop');
+    var resultElement = document.getElementById('result');
+
+    var recognition = new webkitSpeechRecognition();
+
+    recognition.lang = window.navigator.language;
+    recognition.interimResults = true;
+
+    startButton.addEventListener('click', () => { recognition.start(); });
+    stopButton.addEventListener('click', () => { recognition.stop(); });
+
+    recognition.addEventListener('result', (event) => {
+        const result = event.results[event.results.length - 1][0].transcript;
+        resultElement.textContent = result;
+    });
+</script>
+</body>
+</html>
